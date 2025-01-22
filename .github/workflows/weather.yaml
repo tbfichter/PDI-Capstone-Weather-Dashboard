@@ -1,0 +1,52 @@
+name: Get my weather
+
+on: 
+  workflow_dispatch:
+    inputs:
+      city_name:
+        description: "Enter your city name"
+        required: true
+        type: string
+
+      state_code:
+        description: "Enter your state abbreviation(If no state, leave empty)"
+        required: false
+        type: string
+
+      country_code:
+        description: "Enter your country code"
+        required: true
+        type: string
+      
+      units:
+        description: "Specify temperature unit, C or F"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  weather-retrieval:
+    name: Weather Retrieval
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5 
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+      - run: pip install -r requirements.txtpi
+        
+      - name: Execute weather script
+        env:
+          OPENWEATHER_KEY: ${{ secrets.OPENWEATHER_KEY }}
+          CITY: ${{ inputs.city_name }}
+          STATE: ${{ inputs.state_code }}
+          COUNTRY: ${{ inputs.country_code }}
+          UNITS: ${{ inputs.units }}
+        run: python3 weather.py
