@@ -56,10 +56,10 @@ def get_weather(city, state, country, unit_input):
     )
 
 if __name__ == "__main__":
-    city = os.getenv("CITY")
-    state = os.getenv("STATE")
-    country = os.getenv("COUNTRY")
-    unit_input = os.getenv("UNITS")
+    city = os.getenv('CITY')
+    state = os.getenv('STATE')
+    country = os.getenv('COUNTRY')
+    unit_input = os.getenv('UNITS')
 
     if not city:
        city = input("Enter your city name: ")

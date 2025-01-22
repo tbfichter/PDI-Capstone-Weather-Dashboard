@@ -44,6 +44,7 @@ jobs:
         
       - name: Execute weather script
         env:
+          OPENWEATHER_KEY: ${{ secrets.OPENWEATHER_KEY }}
           CITY: ${{ inputs.city_name }}
           STATE: ${{ inputs.state_code }}
           COUNTRY: ${{ inputs.country_code }}
