@@ -11,6 +11,7 @@ on:
       state_code:
         description: "Enter your state abbreviation(If no state, leave empty)"
         required: false
+        default: ''
         type: string
 
       country_code:
