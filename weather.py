@@ -11,6 +11,7 @@ URL_WEATHER = "https://api.openweathermap.org/data/2.5/weather"
 def get_location_coordinates(city: str, state: str, country: str):
     params = {'q': [city, state, country], 'appid': API_KEY}
     response = httpx.get(URL_LOCATION, params=params)
+    response.raise_for_status()
     geo_dict = response.json()
     geo_dict = geo_dict[0]
     latitude = geo_dict.get('lat')
@@ -51,8 +52,10 @@ def get_weather(city, state, country, unit_input):
     wx_wx_list = wx_dict.get('weather')
     wx_wx_dict = wx_wx_list[0]
 
-    print(
-        f"There currently is {wx_wx_dict.get('description')} in {wx_name}. The current temperature is {int(round(wx_main.get('temp')))}{unit_input} and it feels like {int(round(wx_main.get('feels_like')))}{unit_input}."
+    return (
+        f"There currently is {wx_wx_dict.get('description')} in {wx_name}. "  
+        f"The current temperature is {int(round(wx_main.get('temp')))}{unit_input} and " 
+        f"it feels like {int(round(wx_main.get('feels_like')))}{unit_input}."
     )
 
 if __name__ == "__main__":
@@ -70,4 +73,4 @@ if __name__ == "__main__":
     if not unit_input:
         unit_input = input("Specify temperature unit, C or F: ").upper()
 
-    get_weather(city, state, country, unit_input)
+    print( get_weather(city, state, country, unit_input) )
