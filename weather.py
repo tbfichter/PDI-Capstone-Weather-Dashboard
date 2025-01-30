@@ -61,9 +61,11 @@ if __name__ == "__main__":
     country = os.getenv('COUNTRY')
     unit_input = os.getenv('UNITS')
 
+
+
     if not city:
        city = input("Enter your city name: ")
-    if not state:
+    if state is not None:
         state = input("Enter your state abbreviation(If no state, hit enter): ")
     if not country:
         country = input("Enter your country code: ")
