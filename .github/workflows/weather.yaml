@@ -47,7 +47,7 @@ jobs:
         env:
           OPENWEATHER_KEY: ${{ secrets.OPENWEATHER_KEY }}
           CITY: ${{ inputs.city_name }}
-          STATE: ${{ inputs.state_code }}
+          STATE: ${{ inputs.state_code || '' }}
           COUNTRY: ${{ inputs.country_code }}
           UNITS: ${{ inputs.units }}
         run: python3 weather.py
